@@ -1,24 +1,26 @@
 const express = require("express");
 const app = express();
-const http = require("http").createServer(app); // Create HTTP server from app
-const io = require("socket.io")(http); // Pass http server to socket.io
+const http = require("http").createServer(app);
+const io = require("socket.io")(http);
 
 const PORT = process.env.PORT || 3000;
 
-// Serve static files from public
+// Serve static files from public directory
 app.use(express.static("public"));
 
-// Socket connection
+// Handle socket connections
 io.on("connection", (socket) => {
   console.log("A user connected");
+
+  // Handle messages from client
+  socket.on("message", (msg) => {
+    console.log("Message received:", msg);
+    io.emit("message", { text: msg, sender: socket.id }); // Broadcast message with socket id
+  });
 
   socket.on("disconnect", () => {
     console.log("User disconnected");
   });
-
-  setInterval(() => {
-    socket.emit("number", parseInt(Math.random() * 10));
-  }, 1000);
 });
 
 // Start server

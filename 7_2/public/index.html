@@ -2,14 +2,94 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Socket Demo</title>
+    <title>Chat App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      h1 {
+        color: #333;
+        text-align: center;
+      }
+      #messages {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 10px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .message {
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 70%;
+        word-wrap: break-word;
+      }
+      .own-message {
+        background-color: #007bff;
+        color: white;
+        margin-left: auto;
+        text-align: right;
+      }
+      .other-message {
+        background-color: #f1f0f0;
+        color: black;
+        margin-right: auto;
+        text-align: left;
+      }
+      .input-container {
+        max-width: 600px;
+        margin: 0 auto;
+        display: flex;
+        gap: 10px;
+        padding: 10px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      #message {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        outline: none;
+        transition: border-color 0.3s;
+      }
+      #message:focus {
+        border-color: #007bff;
+      }
+      #send {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      #send:hover {
+        background-color: #0056b3;
+      }
+      #send:active {
+        background-color: #004085;
+      }
+    </style>
   </head>
   <body>
-    <h1>Random Number from Server:</h1>
-    <div id="number">Waiting...</div>
+    <h1>Simple Chat</h1>
+    <div class="input-container">
+      <input type="text" id="message" placeholder="Type a message..." />
+      <button id="send">Send</button>
+    </div>
+    <div id="messages"></div>
 
-    <!-- Load socket.io BEFORE scripts.js -->
+    <!-- Load socket.io client library from server -->
     <script src="/socket.io/socket.io.js"></script>
-    <script src="scripts.js"></script>
+    <script src="/scripts.js"></script>
   </body>
 </html>
